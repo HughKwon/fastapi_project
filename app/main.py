@@ -18,11 +18,21 @@ from routers import post,user,auth,vote
 
 
 # pwd_context = CryptContext(schemes = ["bcrypt"], deprecated="auto")
-models.Base.metadata.create_all(bind=engine)
+#models.Base.metadata.create_all(bind=engine) #Not needed it, alembic will handle it
 
 
 app = FastAPI()
 
+#if building a web app, want to keep it strict
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
         
